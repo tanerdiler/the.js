@@ -26,7 +26,7 @@ var TheObject = function (object) {
 	}
 	
 	this.keys = function () {
-		var array = [];
+		var array = the.array();
 		this.iterate(function (key, value) {
 			array.push(key);
 		});
@@ -34,7 +34,10 @@ var TheObject = function (object) {
 	}
 	
 	this.values = function () {
-		var array = [];
+		var array = the.array();
+		this.iterate(function (key, value) {
+			array.push(value);
+		});
 		return array;
 	}
 	

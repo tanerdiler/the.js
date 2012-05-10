@@ -7,9 +7,22 @@ the.array = function (native_array) {
 }
 
 var TheArray = function (native_array) {
+	var self = this;
 	
 	if (the.helper.isNull(native_array)) {
 		native_array = [];
+	}
+	
+	this.get = function (index) {
+		return native_array[index];
+	}
+	
+	this.push = function (item) {
+		native_array.push(item);
+	}
+	
+	this.length = function () {
+		return native_array.length;
 	}
 	
 	this.iterate = function (fnc) {
@@ -50,19 +63,20 @@ var TheArray = function (native_array) {
 	} 
 	
 	this.filter = function(fnc) {
-	        var res = [];
+	        var result = the.array();
 	        this.iterate(function (index, item) {
 	        	if (fnc(index,item)) {
-		              res.push(val);
+	        		result.push(item);
 	        	}
 	        });
-	        return res;
+	        return result;
 	 }
 
-	 this.intersections = function (theSecondArray) {
+	 this.intersections = function (native_array) {
 		   var intersections = the.set();
+		   var theArray = the.array(native_array);
 		   this.iterate(function(index, item){
-			  if (this.contains(item)) {
+			  if (theArray.contains(item)) {
 				  intersections.push(item);
 			  } 
 		   });
@@ -84,19 +98,19 @@ var TheArray = function (native_array) {
 		 var found = false;
 		 var theArray = the.array(nativeArray);
 		 theArray.iterate(function (index, item) {
-			 if (LinkzArrayUtil.contains(srcArray, dstArray[i])) {
+			 if (self.contains(item)) {
 	              found = true;
-	              return false;
+	              return false; // not iterate anymore
              }
 		 });
          return found;
 	 }
 	    
-	 this.containsAll = function (srcArray, dstArray) {
+	 this.containsAll = function (nativeArray) {
 		 var found = true;
 		 var theArray = the.array(nativeArray);
 		 theArray.iterate(function (index, item) {
-			 if (the.helper.not(this.contains(dstArray[i]))) {
+			 if (the.helper.not(self.contains(item))) {
 	              found = false;
              }
 		 });
