@@ -1,8 +1,21 @@
 the.object = function (object) {
-	return new TheObject(object);
+	if (the.helper.isNull(object)) {
+		return new TheArray({});
+	} else {
+		return new TheArray(object);
+	}
 }
 
 var TheObject = function (object) {
+	
+	this.get = function (key) {
+		return object[key];
+	}
+	
+	this.push = function (key, value) {
+		object[item] = value;
+	}
+	
 	this.iterate = function (fnc) {
 		for (var key in object) {
 			if (!object.hasOwnProperty(key)) {
