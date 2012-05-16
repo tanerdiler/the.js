@@ -1,8 +1,8 @@
 the.object = function (object) {
 	if (the.helper.isNull(object)) {
-		return new TheArray({});
+		return new TheObject({});
 	} else {
-		return new TheArray(object);
+		return new TheObject(object);
 	}
 }
 
@@ -13,7 +13,7 @@ var TheObject = function (object) {
 	}
 	
 	this.push = function (key, value) {
-		object[item] = value;
+		object[key] = value;
 	}
 	
 	this.iterate = function (fnc) {

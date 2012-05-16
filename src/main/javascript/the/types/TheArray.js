@@ -72,9 +72,9 @@ var TheArray = function (native_array) {
 	        return result;
 	 }
 
-	 this.intersections = function (native_array) {
+	 this.intersections = function (nativeArray) {
 		   var intersections = the.set();
-		   var theArray = the.array(native_array);
+		   var theArray = the.array(nativeArray);
 		   this.iterate(function(index, item){
 			  if (theArray.contains(item)) {
 				  intersections.push(item);

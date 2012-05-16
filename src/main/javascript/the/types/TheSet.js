@@ -12,6 +12,7 @@ var TheSet = function () {
 		} else {
 			set[item] += 1;
 		}
+		return this;
 	}
 	
 	this.frequencyOf = function (item) {

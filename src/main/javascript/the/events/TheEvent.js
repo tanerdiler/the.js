@@ -3,7 +3,6 @@ the.event = function (eventName) {
 		return eventName.indexOf("on") === 0;
 	}
 	
-	
 	if (the.helper.not(nameIncludes_On_Prefix())) {
 		eventName = "on" + eventName;
 	}
@@ -11,21 +10,25 @@ the.event = function (eventName) {
 	var theEvent = the.events.get(eventName);
 	if (the.helper.isNull(theEvent)) {
 		theEvent = new TheEvent(eventName);
-		the.events.push(theEvent);
+		the.events.push(eventName, theEvent);
 	}
 	
 	return theEvent;
 }
 
 
-var TheEvent = function (name) {
+var TheEvent = function (_name) {
 	
 	var listeners = the.array();
+	
+	this.name = function () {
+		return _name;
+	}
 
 	this.fire = function () {
 		listeners.iterate(function (index, listener) {
-			if (listener.providesCondition()) {
-				listener[name]();
+			if (the.helper.isNull(listener.providesCondition) || listener.providesCondition()) {
+				listener[_name]();
 			}
 		}); 
 	}
@@ -36,8 +39,7 @@ var TheEvent = function (name) {
 	}
 }
 
-the.event('onMouseClick').fire();
+//the.event('onMouseClick').fire();
 
-the.listener(self).listen('onMouseClick').when(function () {
-	
-});
+//the.listener(self).listen('onMouseClick').when(function () {
+//});
