@@ -32,7 +32,7 @@ var TheObject = function (object) {
 	
 	this.size = function () {
 		var size = 0;
-		this.iterate(object, function (key, value) {
+		this.iterate(function (key, value) {
 			size++;
 		});
 		return size;
