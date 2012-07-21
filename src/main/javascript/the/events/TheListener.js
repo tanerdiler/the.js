@@ -4,10 +4,12 @@ the.listener = function (object) {
 
 var TheListener = function (object) {
 	var self = this;
+	var eventName = null;
 	
 	var conditionToTriggerListener = null;
 	
-	this.listen = function (eventName) {
+	this.listen = function (eventNameParameter) {
+		eventName = eventNameParameter;
 		var event = the.events.get(eventName);
 		event.addListener(self);
 		return self;
@@ -18,10 +20,14 @@ var TheListener = function (object) {
 		return self;
 	}
 	
-	this.providesCondition = function () {
+	this.providesCondition = function (source) {
 		if (the.helper.isNull(conditionToTriggerListener)) {
 			return true;
 		}
-		return conditionToTriggerListener();
+		return conditionToTriggerListener(source);
+	}
+	
+	this.trigger = function (source) {
+		object[eventName](source);
 	}
 }

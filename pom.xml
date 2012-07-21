@@ -36,7 +36,13 @@
 							<inputDir>src/main/javascript</inputDir>
 							<includes>
 								<include>the.js</include>
-								<include>**/*.js</include>
+								<include>**/TheHelper.js</include>
+								<include>**/TheObject.js</include>
+								<include>**/TheArray.js</include>
+								<include>**/TheSet.js</include>
+								<include>**/TheEvent.js</include>
+								<include>**/TheEvents.js</include>
+								<include>**/TheListener.js</include>
 							</includes>
 						</aggregation>
 					</aggregations>

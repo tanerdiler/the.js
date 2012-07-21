@@ -75,9 +75,10 @@ var TheObject = function (object) {
 		if (the.helper.isNull(json)) {return {};}
 		var json = decodeURIComponent(json);
 		try {
-			return eval('(' + json + ')');
+			object = eval('(' + json + ')');
 		} catch (e) {
-		    return {}; 
+		    object = {}; 
 		}
+		return new TheObject(object);
 	}
 }
