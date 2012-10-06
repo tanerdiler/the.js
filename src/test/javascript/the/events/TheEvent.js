@@ -38,9 +38,17 @@ describe('The Event',function(){
 	  							function(source){
 	  								return listenerCallingTimes < 1;
 	  							});
-	  the.event('MouseClick').fire().fire();
+	  the.event('MouseClick').fire();
+	  the.event('MouseClick').fire();
 	  expect(listenerCallingTimes).toBe(1);
   })
   
- 
+  it('should stop triggering next listeners', function(){
+          var listenerCallingTimes = 0;
+          the.listener({onMouseClick:function () {listenerCallingTimes++; return false;}}).listen('onMouseClick');
+          the.listener({onMouseClick:function () {listenerCallingTimes = listenerCallingTimes + 2; return false;}}).listen('onMouseClick');
+          the.event('MouseClick').fire();
+          expect(listenerCallingTimes).toBe(1); 
+  })
+   
 });

@@ -28,6 +28,6 @@ var TheListener = function (object) {
 	}
 	
 	this.trigger = function (source) {
-		object[eventName](source);
+		return object[eventName](source);
 	}
 }

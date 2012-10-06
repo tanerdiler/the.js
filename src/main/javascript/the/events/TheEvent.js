@@ -26,14 +26,19 @@ var TheEvent = function (_name) {
 	}
 
 	this.fire = function (source) {
+                var firingStopped = false;
 		listeners.iterate(function (index, listener) {
-			if (the.helper.isNull(listener.providesCondition) 
+			var keepContinue = true;
+                        if (the.helper.isNull(listener.providesCondition) 
 					|| listener.providesCondition(source))
 			{
-				listener.trigger(source);
+				keepContinue = listener.trigger(source);
+                                firingStopped = firingStopped && (the.helper.isSet(keepContinue) && keepContiue == false);
+				
 			}
+			return keepContinue;
 		});
-		return this;
+		return the.helper.not(firingStopped);
 	}
 	
 	this.addListener = function (listener) {
