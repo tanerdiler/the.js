@@ -36,7 +36,17 @@
 							<inputDir>src/main/javascript</inputDir>
 							<includes>
 								<include>the.js</include>
-								<include>**/*.js</include>
+								<include>the/helpers/TheHelper.js</include>
+								<include>the/helpers/ThePosition.js</include>
+								<include>the/helpers/TheDimension.js</include>
+								<include>the/types/TheArray.js</include>
+								<include>the/types/TheObject.js</include>
+								<include>the/types/TheSet.js</include>
+								<include>the/events/TheEvent.js</include>
+								<include>the/events/TheEvents.js</include>
+								<include>the/events/TheListener.js</include>
+								<include>the/browser/TheScroll.js</include>
+								<include>the/browser/TheBrowser.js</include>
 							</includes>
 						</aggregation>
 					</aggregations>

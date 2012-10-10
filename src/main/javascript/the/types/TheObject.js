@@ -14,6 +14,7 @@ var TheObject = function (object) {
 	
 	this.push = function (key, value) {
 		object[key] = value;
+		return this;
 	}
 	
 	this.iterate = function (fnc) {
@@ -52,6 +53,14 @@ var TheObject = function (object) {
 			array.push(value);
 		});
 		return array;
+	}
+	
+	this.join = function (keyValueDelimiter, pairDelimiter) {
+		var queryParams = []; 
+	    this.iterate (function (key, value) {
+	    	queryParams.push(key + keyValueDelimiter + value);
+	    });
+	    return queryParams.join(pairDelimiter);
 	}
 	
 	this.to_json = function () {
