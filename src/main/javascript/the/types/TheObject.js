@@ -8,6 +8,8 @@ the.object = function (object) {
 
 var TheObject = function (object) {
 	
+        var self = this;
+
 	this.get = function (key) {
 		return object[key];
 	}
@@ -53,6 +55,13 @@ var TheObject = function (object) {
 			array.push(value);
 		});
 		return array;
+	}
+
+	this.merge = function (theObject) {
+	  theObject.iterate(function(key, value){
+             self.put(key, value);
+          });   
+          return this; 
 	}
 	
 	this.join = function (keyValueDelimiter, pairDelimiter) {
