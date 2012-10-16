@@ -35,7 +35,7 @@ var TheObject = function (object) {
 	
 	this.size = function () {
 		var size = 0;
-		this.iterate(object, function (key, value) {
+		this.iterate(function (key, value) {
 			size++;
 		});
 		return size;
@@ -93,9 +93,10 @@ var TheObject = function (object) {
 		if (the.helper.isNull(json)) {return {};}
 		var json = decodeURIComponent(json);
 		try {
-			return eval('(' + json + ')');
+			object = eval('(' + json + ')');
 		} catch (e) {
-		    return {}; 
+		    object = {}; 
 		}
+		return new TheObject(object);
 	}
 }

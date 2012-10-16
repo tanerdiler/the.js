@@ -7,13 +7,13 @@ the.event = function (eventName) {
 		eventName = "on" + eventName;
 	}
 	
-	var theEvent = the.events.get(eventName);
-	if (the.helper.isNull(theEvent)) {
-		theEvent = new TheEvent(eventName);
-		the.events.push(eventName, theEvent);
+	var event = the.events.get(eventName);
+	if (the.helper.isNull(event)) {
+		event = new TheEvent(eventName);
+		the.events.push(eventName, event);
 	}
 	
-	return theEvent;
+	return event;
 }
 
 
@@ -25,12 +25,20 @@ var TheEvent = function (_name) {
 		return _name;
 	}
 
-	this.fire = function () {
+	this.fire = function (source) {
+                var firingStopped = false;
 		listeners.iterate(function (index, listener) {
-			if (the.helper.isNull(listener.providesCondition) || listener.providesCondition()) {
-				listener[_name]();
+			var keepContinue = true;
+                        if (the.helper.isNull(listener.providesCondition) 
+					|| listener.providesCondition(source))
+			{
+				keepContinue = listener.trigger(source);
+                                firingStopped = firingStopped && (the.helper.isSet(keepContinue) && keepContiue == false);
+				
 			}
-		}); 
+			return keepContinue;
+		});
+		return the.helper.not(firingStopped);
 	}
 	
 	this.addListener = function (listener) {
