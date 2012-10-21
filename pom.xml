@@ -47,6 +47,8 @@
 								<include>the/events/TheListener.js</include>
 								<include>the/browser/TheScroll.js</include>
 								<include>the/browser/TheBrowser.js</include>
+								<include>the/ui/TheAbstractElement.js</include>
+								<include>the/ui/TheFlash.js</include>
 							</includes>
 						</aggregation>
 					</aggregations>

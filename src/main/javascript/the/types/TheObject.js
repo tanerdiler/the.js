@@ -65,11 +65,11 @@ var TheObject = function (object) {
 	}
 	
 	this.join = function (keyValueDelimiter, pairDelimiter) {
-		var queryParams = []; 
+		var queryParams = '' 
 	    this.iterate (function (key, value) {
-	    	queryParams.push(key + keyValueDelimiter + value);
+	    	queryParams += key + keyValueDelimiter + value + pairDelimiter;
 	    });
-	    return queryParams.join(pairDelimiter);
+	    return queryParams;
 	}
 	
 	this.to_json = function () {

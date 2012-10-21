@@ -1,4 +1,8 @@
-var the.flash = function (id, src) {
+the.flash = function (id, src) {
+	return new TheFlash(id, src);
+}
+
+var TheFlash = function (id, src) {
     
 	the.element.prototype.constructor.call(this, id);  
 	  
@@ -39,11 +43,7 @@ var the.flash = function (id, src) {
   	var wrapSrcWithClickTag = function ()
   	{
   		if (the.helper.isBlank(clickTag))
-  		{		var paramElement = '';
-		if (the.helper.isSet(parameters)) {
-			paramElement = ' flashvars="'+ parameters.join('=', '&') +'" ';
-		}
-		return paramElement;
+  		{			
   			return src;
   		}
   		
@@ -61,22 +61,14 @@ var the.flash = function (id, src) {
   	
     this.code = function ()
     {
-    	if (the.helper.isSet(html))
-    	{
-			return html;
-		}		var paramElement = '';
-		if (the.helper.isSet(parameters)) {
-			paramElement = ' flashvars="'+ parameters.join('=', '&') +'" ';
-		}
-		return paramElement;
-    	
+        var html = '';   	
     	var srcWithClickTag = wrapSrcWithClickTag();
     	var width = this.dimension().width();
     	var height = this.dimension().height();
 
     	html = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ' +
         'codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" ' +
-		 style() +
+		 this.style() +
         'width="'+ width +'" height="'+ height +'" id="'+ id +'" name="'+id+'">' +
         '<param name="movie" value="' + srcWithClickTag + '">' +
         flashParams() +
@@ -84,7 +76,7 @@ var the.flash = function (id, src) {
         '<param name="wmode" value="transparent">' +
         '<param name="swliveconnect" value="true">' +
         '<param name="allowScriptAccess" value="always">' +
-        '<embed id ="embed-'+id+'" src="' + srcWithClickTag + '" quality="high" wmode="transparent" ' +
+        '<embed id="embed-'+id+'" src="' + srcWithClickTag + '" quality="high" wmode="transparent" ' +
         'pluginspage="http://www.macromedia.com/go/getflashplayer" ' +
         'swliveconnect="true" name="embed-'+id+'" ' + 
         'allowfullscreen="true" ' +
@@ -95,5 +87,5 @@ var the.flash = function (id, src) {
     	return html;
     }
 }    
-the.flash.prototype = new the.element;
-the.flash.prototype.constructor = the.flash;
+TheFlash.prototype = new the.element;
+TheFlash.prototype.constructor = TheFlash;
